@@ -1,5 +1,6 @@
 import { useState } from "react";
-import './components/Form page/Form.css'
+import '../Form.css'
+import {auth} from '../../../assests/Auth/auth'
 
 const LETTERS_ONLY = /^[A-Za-z]*$/
 const MAX_NAME_LENGTH = 18
