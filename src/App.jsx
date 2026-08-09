@@ -1,9 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import ProtectedRoute from './assets/Route/ Protectedroute'
+import ProtectedRoute from './assets/Route/Protectedroute'
 import Landing from './components/Landing page/Landing'
 import Login from './components/Form page/Login/Login'
 import Signup from './components/Form page/Sign up/Sign-up'
 import Dashboard from './components/Dashboard/Dashboard'
+import ProfilePage from './components/Profile-page/ProfilePage'
 import AdminPanel from './components/Dashboard/AdminPanel/AdminPanel'
 import ProductDetail from './components/Product-page/Product-detail/Product-detail'
 import Cart from './components/Cart/Cart'
@@ -17,6 +18,8 @@ function App() {
       <Route path="/signup" element={<Signup />} />
 
       <Route path="/dashboard"element={<ProtectedRoute><Dashboard /></ProtectedRoute>}/>
+
+      <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>}/>
 
       <Route path="/products/:id" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>}/>
 

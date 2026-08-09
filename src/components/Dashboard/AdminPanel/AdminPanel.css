@@ -5,6 +5,10 @@
   text-align: left;
 }
 
+.admin-panel h1 {
+  margin-bottom: 8px;
+}
+
 .admin-tabs {
   display: flex;
   gap: 8px;
@@ -20,6 +24,11 @@
   cursor: pointer;
   font: inherit;
   border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.admin-tab:hover {
+  color: var(--text-h);
 }
 
 .admin-tab.active {
@@ -37,8 +46,44 @@
   color: var(--accent);
   background: var(--accent-bg);
   border: 1px solid var(--accent-border);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 8px 12px;
+}
+
+.admin-panel button {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text-h);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.admin-panel button:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+}
+
+.admin-panel button:active {
+  transform: translateY(0);
+}
+
+.admin-section > button,
+.admin-form button[type='submit'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.admin-section > button:hover,
+.admin-form button[type='submit']:hover {
+  background: var(--accent);
+  opacity: 0.9;
 }
 
 .admin-table {
@@ -51,6 +96,22 @@
   text-align: left;
   padding: 10px 12px;
   border-bottom: 1px solid var(--border);
+}
+
+.admin-table th {
+  color: var(--text);
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.admin-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.admin-table tbody tr:hover {
+  background: var(--accent-bg);
 }
 
 .admin-table td button {
@@ -66,12 +127,20 @@
 }
 
 .admin-form input {
-  padding: 6px 10px;
+  padding: 7px 10px;
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: 6px;
   background: var(--bg);
   color: var(--text-h);
+  font: inherit;
   flex: 1 1 160px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.admin-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-bg);
 }
 
 @media (max-width: 768px) {

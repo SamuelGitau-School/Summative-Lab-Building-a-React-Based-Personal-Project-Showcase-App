@@ -4,4 +4,10 @@
   font-size: 13px;
   background-color: var(--accent) !important;
   color: var(--bg) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 0 3px var(--accent-bg);
 }

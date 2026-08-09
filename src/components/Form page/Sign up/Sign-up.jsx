@@ -76,7 +76,7 @@ function Signup() {
   };
 
   return (
-    <div className="signup-wrapper">
+    <div className="signup-wrapper page-enter">
       <form className="signup-card" onSubmit={handleSubmit}>
         <h2>Sign Up</h2>
         {error && <p className="form-error">{error}</p>}

@@ -6,7 +6,7 @@ import Categories from '../Drop-Down/Catergories/Categories';
 import Profile from '../Drop-Down/Profile/Profile';
 import { useAuth } from '../../assets/Auth/authContext';
 import { useCart } from '../../assets/Cart/CartContext';
-import { getProducts } from '../../assets/Product/Product'
+import { getProducts } from '../../assets/Product/Product';
 import './Dashboard.css';
 
 const categoryIcons = {
@@ -46,14 +46,13 @@ function Dashboard() {
           if (seen.has(p.category)) return false;
           seen.add(p.category);
           return true;
-        })
+        });
         setFeatured(picks);
       })
-      .catch((err) => console.error('Failed to load products:', err))
       .finally(() => setLoading(false));
   }, []);
 
-  return (<>
+  return (
     <div>
       <Navbar onSearch={setSearch} />
 
@@ -62,7 +61,7 @@ function Dashboard() {
         <Profile />
       </div>
 
-      <div className="dashboard-hero">
+      <div className="dashboard-hero page-enter">
         <Typography variant="h5" sx={{ color: 'var(--text-h)' }}>
           Welcome back{user ? `, ${user.firstName}` : ''}
         </Typography>
@@ -108,8 +107,7 @@ function Dashboard() {
         )}
       </div>
     </div>
-    </>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

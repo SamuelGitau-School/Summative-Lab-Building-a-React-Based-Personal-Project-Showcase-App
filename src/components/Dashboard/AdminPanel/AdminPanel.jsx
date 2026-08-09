@@ -6,7 +6,7 @@ import './AdminPanel.css'
 function AdminPanel() {
   const [tab, setTab] = useState('users')
   return (
-    <div className="admin-panel">
+    <div className="admin-panel page-enter">
       <h1>Admin Panel</h1>
 
       <div className="admin-tabs">

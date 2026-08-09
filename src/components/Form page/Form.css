@@ -44,6 +44,11 @@
   color: var(--text-h);
   font: inherit;
   font-size: 14px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-input:hover {
+  border-color: var(--accent-border);
 }
 
 .form-input:focus {
@@ -63,10 +68,17 @@
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
 }
 
-.form-button:hover {
+.form-button:hover:not(:disabled) {
   opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.35);
+}
+
+.form-button:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .form-button:disabled {

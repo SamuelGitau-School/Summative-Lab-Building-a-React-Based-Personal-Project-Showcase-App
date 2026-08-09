@@ -37,7 +37,7 @@ const features = [
 
 function Landing() {
   return (
-    <div>
+    <div className="page-enter">
       <div className="landing-hero">
         <h1>Project showcase</h1>
         <p>Browse products, build a cart, and manage your account — all in one place.</p>

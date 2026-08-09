@@ -41,7 +41,7 @@ function Login(){
   }
 
   return(
-    <div className="form-wrapper">
+    <div className="form-wrapper page-enter">
       <form className="form" onSubmit={handleSubmit}>
         <h1>LOG IN</h1>{error && <p className="form-error">{error}</p>}
 

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Typography, Button, CircularProgress, Alert, Container } from '@mui/material';
 import { getProducts } from '../../../assets/Product/Product';
 import { useCart } from '../../../assets/Cart/CartContext';
+import './Product-detail.css';
 
 function ProductDetail() {
   const { id } = useParams()
@@ -30,21 +31,27 @@ function ProductDetail() {
   if (!product) return null
 
   return (
-    <Container maxWidth="sm" className="flex flex-col gap-3 py-8">
-      <Typography variant="h5" sx={{ color: 'var(--text-h)' }}>
-        {product.name}
-      </Typography>
-      <Typography variant="h6" sx={{ color: 'var(--accent)' }}>
-        ${Number(product.price).toFixed(2)}
-      </Typography>
-      {product.description && (
-        <Typography variant="body1" sx={{ color: 'var(--text)' }}>
-          {product.description}
+    <Container maxWidth="sm" className="flex flex-col gap-3 py-8 page-enter">
+      <Link to="/dashboard" className="product-detail-back">
+        ← Back to products
+      </Link>
+
+      <div className="product-detail-card">
+        <Typography variant="h5" sx={{ color: 'var(--text-h)' }}>
+          {product.name}
         </Typography>
-      )}
-      <Button variant="contained" className="self-start" onClick={() => addItem(product)}>
-        Add to cart
-      </Button>
+        <Typography variant="h6" sx={{ color: 'var(--accent)' }}>
+          ${Number(product.price).toFixed(2)}
+        </Typography>
+        {product.description && (
+          <Typography variant="body1" sx={{ color: 'var(--text)' }}>
+            {product.description}
+          </Typography>
+        )}
+        <Button variant="contained" className="self-start" onClick={() => addItem(product)}>
+          Add to cart
+        </Button>
+      </div>
     </Container>
   )
 }

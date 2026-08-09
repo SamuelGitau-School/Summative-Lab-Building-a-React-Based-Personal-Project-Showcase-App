@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, Typography, Button, CircularProgress, Alert } from '@mui/material';
 import { getProducts } from '../../assets/Product/Product';
 import { useCart } from '../../assets/Cart/CartContext';
+import './Product.css';
 
 function Product({ searchQuery = '' }) {
   const [products, setProducts] = useState([])
@@ -32,15 +33,28 @@ function Product({ searchQuery = '' }) {
   if (error) 
     return <Alert severity="error" className="m-4">{error}</Alert>
 
+  if (filtered.length === 0) {
+    return (
+      <div className="product-empty page-enter">
+        <Typography variant="h6" sx={{ color: 'var(--text-h)' }}>
+          No products found
+        </Typography>
+        <Typography variant="body2" sx={{ color: 'var(--text)' }}>
+          Try a different search or category.
+        </Typography>
+      </div>
+    );
+  }
+
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-4">
+    <div className="product-grid page-enter">
       {filtered.map((product) => (
-        <Card key={product.id} sx={{ bgcolor: 'var(--bg)', border: '1px solid var(--border)' }}>
+        <Card key={product.id} className="product-card">
           <CardContent className="flex flex-col gap-2">
             <Typography variant="subtitle1" sx={{ color: 'var(--text-h)' }}>
               {product.name}
             </Typography>
-            <Typography variant="body2" sx={{ color: 'var(--text)' }}>
+            <Typography variant="body2" sx={{ color: 'var(--accent)' }}>
               ${Number(product.price).toFixed(2)}
             </Typography>
             <div className="flex gap-2">
