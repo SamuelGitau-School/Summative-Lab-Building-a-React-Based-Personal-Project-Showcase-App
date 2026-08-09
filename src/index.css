@@ -1,5 +1,5 @@
+@import "tailwindcss";
 :root {
-  /* raw palette */
   --dark-walnut: #582f0e;
   --saddle-brown: #7f4f24;
   --toffee-brown: #936639;

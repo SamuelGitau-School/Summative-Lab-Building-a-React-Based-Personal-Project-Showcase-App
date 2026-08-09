@@ -1,0 +1,151 @@
+.admin-panel {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  text-align: left;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-tab {
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  border-bottom: 2px solid transparent;
+}
+
+.admin-tab.active {
+  color: var(--text-h);
+  border-bottom-color: var(--accent);
+}
+
+.admin-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin-error {
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-table td button {
+  margin-right: 8px;
+  margin-bottom: 4px;
+}
+
+.admin-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.admin-form input {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text-h);
+  flex: 1 1 160px;
+}
+
+@media (max-width: 768px) {
+  .admin-panel {
+    padding: 24px 12px;
+  }
+
+  .admin-form input {
+    flex: 1 1 120px;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-tabs {
+    gap: 4px;
+  }
+
+  .admin-tab {
+    flex: 1;
+    padding: 8px 4px;
+    font-size: 14px;
+  }
+
+  .admin-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-table thead {
+    display: none;
+  }
+
+  .admin-table,
+  .admin-table tbody,
+  .admin-table tr,
+  .admin-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .admin-table tr {
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+  }
+
+  .admin-table td {
+    border-bottom: none;
+    padding: 6px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .admin-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-h);
+    margin-right: auto;
+  }
+
+  .admin-table td:last-child {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-table td:last-child::before {
+    margin-bottom: 4px;
+  }
+
+  .admin-table td button {
+    width: 100%;
+    margin-right: 0;
+  }
+}
