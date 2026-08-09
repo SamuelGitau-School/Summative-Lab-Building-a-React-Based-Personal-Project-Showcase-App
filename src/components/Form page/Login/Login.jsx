@@ -1,11 +1,14 @@
 import {  useState } from "react"
+import { useNavigate } from "react-router-dom"
+import {login} from '../../../assests/Auth/auth'
+import { useAuth } from "../../../assests/Auth/authContext"
 import '../Form.css'
-import {auth} from '../../../assests/Auth/auth'
-
 
 
 function Login(){
 
+    const navigate = useNavigate ()
+    const {loginUser} = useAuth ()
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState ('')
     const [error,setError] = useState('')
@@ -22,10 +25,10 @@ function Login(){
         
         setLoading(true)
         try{
-            const data = await Login(email, password);
+            const data = await login(email, password);
             localStorage.setItem('token', data.token);
-            // redirect, update auth context, etc.
-            // navigate('/dashboard');
+            loginUser(data.user)
+            navigate('/dashboard')
         }
         catch(err){
             setError(err.message)

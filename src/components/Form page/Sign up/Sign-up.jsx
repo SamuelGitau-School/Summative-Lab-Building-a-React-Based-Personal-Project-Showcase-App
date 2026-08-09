@@ -1,11 +1,15 @@
 import { useState } from "react";
+import { login } from "../../../assests/Auth/auth";
+import { useAuth } from "../../../assests/Auth/authContext";
 import '../Form.css'
-import {auth} from '../../../assests/Auth/auth'
-
+import { useNavigate } from "react-router-dom";
 const LETTERS_ONLY = /^[A-Za-z]*$/
 const MAX_NAME_LENGTH = 18
 
 function Signup (){
+
+    const navigate = useNavigate()
+    const {loginUser} = useAuth ()
     const [firstName,setFirstName] = useState ('')
     const [lastName, setLastName] = useState('')
     const [userName, setUserName] = useState('')
@@ -50,8 +54,8 @@ function Signup (){
         try{
             const data =await Signup({userName,password,firstName,lastName,email})
             localStorage.setItem('token',data.token)
-            // redirect, update auth context, etc.
-            // navigate('/dashboard');
+            loginUser(data.user)
+            navigate('/dashboard')
         }
         catch(err){
             setError(err.message)
@@ -127,7 +131,7 @@ function Signup (){
                 />
 
                 <button className="form-button" type="submit" disabled={loading}>
-                    {loading ? 'Loading....' : 'Signing up'} </button>
+                    {loading ? 'Loading....' : 'Sign Up'} </button>
             </form>
         </div>
     )
