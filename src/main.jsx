@@ -1,18 +1,16 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider, CssBaseline } from '@mui/material';
-import { AuthProvider } from './assests/Auth/AuthContext';
-import { CartProvider } from './assests/Cart/CartContext';
-import theme from './assests/theme';
+import { ThemeModeProvider } from './assets/Theme/Theme-mode-context';
+import { AuthProvider } from './assets/Auth/authContext';
+import { CartProvider } from './assets/Cart/CartContext';
 import App from './App';
 import './App.css';
 import './index.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <ThemeModeProvider>
       <BrowserRouter>
         <AuthProvider>
           <CartProvider>
@@ -20,6 +18,6 @@ createRoot(document.getElementById('root')).render(
           </CartProvider>
         </AuthProvider>
       </BrowserRouter>
-    </ThemeProvider>
+    </ThemeModeProvider>
   </StrictMode>
-);
+)

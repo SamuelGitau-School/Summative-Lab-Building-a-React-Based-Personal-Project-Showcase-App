@@ -1,0 +1,7 @@
+.profile-avatar {
+  width: 32px;
+  height: 32px;
+  font-size: 13px;
+  background-color: var(--accent) !important;
+  color: var(--bg) !important;
+}
