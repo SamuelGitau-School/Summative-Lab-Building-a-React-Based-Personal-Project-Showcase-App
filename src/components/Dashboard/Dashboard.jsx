@@ -46,9 +46,10 @@ function Dashboard() {
           if (seen.has(p.category)) return false;
           seen.add(p.category);
           return true;
-        });
+        })
         setFeatured(picks);
       })
+      .catch((err) => console.error('Failed to load products:', err))
       .finally(() => setLoading(false));
   }, []);
 
