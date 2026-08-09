@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react';
 import { Typography, Button, Container } from '@mui/material';
 import { useCart } from '../../../assets/Cart/CartContext';
 
+function wishlistKey(userId) {
+  return userId ? `wishlist_${userId}` : 'wishlist_guest';
+}
+
 // Persists
 function Wishlist() {
     const [items, setItems] = useState(() => {

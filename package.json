@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "server": "json-server-auth db.json --port 3001",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -16,6 +17,8 @@
     "@mui/icons-material": "^9.3.1",
     "@mui/material": "^9.3.1",
     "@tailwindcss/vite": "^4.3.3",
+    "json-server": "^1.0.0-beta.15",
+    "json-server-auth": "^2.1.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.2",

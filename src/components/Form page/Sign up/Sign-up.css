@@ -1,0 +1,28 @@
+.signup-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 24px 16px;
+  background: linear-gradient(135deg, var(--accent-bg), transparent 60%);
+}
+
+.signup-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  max-width: 360px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+}
+
+.signup-card h2 {
+  text-align: center;
+  margin-bottom: 16px;
+}

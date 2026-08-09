@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button, Menu, MenuItem } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-function Categories({ categories = ['All', 'Electronics', 'Clothing', 'Home'], onSelect }) {
+function Categories({ categories = ['All', 'Electronics', 'Clothing', 'Accesories'], onSelect }) {
     const [anchorEl, setAnchorEl] = useState(null)
     const [selected, setSelected] = useState('All')
     const open = Boolean(anchorEl)

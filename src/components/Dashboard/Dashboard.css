@@ -1,0 +1,52 @@
+.dashboard-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 20px;
+}
+
+.dashboard-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 20px 20px;
+}
+
+.dashboard-featured {
+  padding: 0 20px 32px;
+}
+
+.dashboard-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.dashboard-product-card {
+  border-radius: 12px !important;
+  border: 1px solid var(--border) !important;
+  background: color-mix(in srgb, var(--bg) 60%, transparent) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow) !important;
+  transition: transform 0.15s ease;
+}
+
+.dashboard-product-card:hover {
+  transform: translateY(-3px);
+}
+
+.dashboard-card-icon {
+  color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .dashboard-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .dashboard-card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
