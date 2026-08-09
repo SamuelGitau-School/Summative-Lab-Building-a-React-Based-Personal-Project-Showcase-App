@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Typography, Button, CircularProgress, Alert, Container } from '@mui/material';
 import { getProducts } from '../../../assets/Product/Product';
 import { useCart } from '../../../assets/Cart/CartContext';
+import BackButton from '../../../assets/Navbar/BackButton';
 import './Product-detail.css';
 
 function ProductDetail() {
@@ -32,9 +33,7 @@ function ProductDetail() {
 
   return (
     <Container maxWidth="sm" className="flex flex-col gap-3 py-8 page-enter">
-      <Link to="/dashboard" className="product-detail-back">
-        ← Back to products
-      </Link>
+      <BackButton />
 
       <div className="product-detail-card">
         <Typography variant="h5" sx={{ color: 'var(--text-h)' }}>

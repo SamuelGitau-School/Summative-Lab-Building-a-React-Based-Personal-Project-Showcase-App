@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { signup } from '../../../assets/Auth/auth';
 import { useAuth } from '../../../assets/Auth/authContext';
+import BackButton from '../../../assets/Navbar/BackButton';
 import '../Form.css';
 import './Sign-up.css';
 
@@ -78,6 +79,7 @@ function Signup() {
   return (
     <div className="signup-wrapper page-enter">
       <form className="signup-card" onSubmit={handleSubmit}>
+        <BackButton fallback="/" />
         <h2>Sign Up</h2>
         {error && <p className="form-error">{error}</p>}
         <label className="form-label" htmlFor="username">Username</label>

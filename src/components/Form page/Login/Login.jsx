@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { login } from '../../../assets/Auth/auth'
 import { useAuth } from "../../../assets/Auth/authContext"
+import BackButton from '../../../assets/Navbar/BackButton'
 import '../Form.css'
 
 
@@ -43,6 +44,7 @@ function Login(){
   return(
     <div className="form-wrapper page-enter">
       <form className="form" onSubmit={handleSubmit}>
+        <BackButton fallback="/" />
         <h1>LOG IN</h1>{error && <p className="form-error">{error}</p>}
 
         <label  className="form-label" htmlFor="email">Email</label>

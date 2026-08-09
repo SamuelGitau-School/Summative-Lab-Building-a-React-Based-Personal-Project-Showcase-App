@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Container, Typography, Tabs, Tab, TextField, Button, Alert, Stack } from '@mui/material';
 import { useAuth } from '../../assets/Auth/authContext';
 import { updateUser, changePassword } from '../../assets/User/user';
+import BackButton from '../../assets/Navbar/BackButton';
 import './ProfilePage.css';
 
 function ProfilePage() {
@@ -12,6 +13,7 @@ function ProfilePage() {
 
   return (
     <Container maxWidth="sm" className="profile-page page-enter py-8">
+      <BackButton />
       <Typography variant="h5" sx={{ color: 'var(--text-h)' }}>
         Account settings
       </Typography>

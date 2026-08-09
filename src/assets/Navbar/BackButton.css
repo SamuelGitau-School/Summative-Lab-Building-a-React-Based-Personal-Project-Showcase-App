@@ -1,0 +1,9 @@
+.back-button {
+  color: var(--text) !important;
+  align-self: flex-start;
+  margin-bottom: 4px;
+}
+
+.back-button:hover {
+  color: var(--accent) !important;
+}

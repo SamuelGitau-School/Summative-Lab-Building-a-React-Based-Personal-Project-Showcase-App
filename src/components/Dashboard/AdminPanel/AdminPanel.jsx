@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { getAllUsers, deleteUser, updateUser} from '../../../assets/User/user'
 import {getProducts, createProduct, updateProduct, deleteProduct, } from '../../../assets/Product/Product'
+import BackButton from '../../../assets/Navbar/BackButton'
 import './AdminPanel.css'
 
 function AdminPanel() {
   const [tab, setTab] = useState('users')
   return (
     <div className="admin-panel page-enter">
+      <BackButton />
       <h1>Admin Panel</h1>
 
       <div className="admin-tabs">

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Typography, Button, IconButton, Container, TextField } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useCart } from '../../assets/Cart/CartContext';
+import BackButton from '../../assets/Navbar/BackButton';
 import './Cart.css';
 
 function Cart() {
@@ -10,6 +11,7 @@ function Cart() {
   if (items.length === 0) {
     return (
       <Container maxWidth="sm" className="page-enter">
+        <BackButton />
         <div className="cart-empty">
           <svg className="cart-empty-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
             <circle cx="9" cy="21" r="1" />
@@ -32,6 +34,7 @@ function Cart() {
 
   return (
     <Container maxWidth="sm" className="cart-page page-enter py-8">
+      <BackButton />
       <Typography variant="h5" sx={{ color: 'var(--text-h)' }}>
         Your cart
       </Typography>
