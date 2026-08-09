@@ -24,6 +24,8 @@ function Login(){
         try{
             const data = await Login(email, password);
             localStorage.setItem('token', data.token);
+            // redirect, update auth context, etc.
+            // navigate('/dashboard');
         }
         catch(err){
             setError(err.message)

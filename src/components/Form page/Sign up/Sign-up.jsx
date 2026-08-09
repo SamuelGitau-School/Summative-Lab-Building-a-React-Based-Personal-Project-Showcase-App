@@ -50,6 +50,8 @@ function Signup (){
         try{
             const data =await Signup({userName,password,firstName,lastName,email})
             localStorage.setItem('token',data.token)
+            // redirect, update auth context, etc.
+            // navigate('/dashboard');
         }
         catch(err){
             setError(err.message)
