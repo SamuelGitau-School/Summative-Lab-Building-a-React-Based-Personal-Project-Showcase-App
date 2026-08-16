@@ -1,14 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD:src/components/Dashboard/Dashboard.jsx
-import { Typography, Card, CardContent, Button, CircularProgress, TextField, MenuItem } from '@mui/material';
-import Navbar from '../../assets/Navbar/Navbar';
-import Categories from '../Drop-Down/Catergories/Categories';
-import Profile from '../Drop-Down/Profile/Profile';
-import { useAuth } from '../../assets/Auth/authContext';
-import { useCart } from '../../assets/Cart/CartContext';
-import { getProducts } from '../../assets/Product/Product';
-=======
 import { Typography, Card, CardContent, Button, CircularProgress } from '@mui/material';
 import Navbar from '../../components/layout/Navbar/Navbar.jsx';
 import Categories from '../../components/layout/dropdown/Categories';
@@ -16,7 +7,7 @@ import Profile from '../../components/layout/dropdown/Profile';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
 import { getProducts } from '../../utils/product';
->>>>>>> 9bfd4b36cb13731285e65a7f14061dcc8221c602:src/pages/dashboard/Dashboard.jsx
+
 import './Dashboard.css';
 
 const categoryIcons = {
