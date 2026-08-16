@@ -21,10 +21,12 @@ const Catalog = [
 ]
 
 export async function getProducts(id) {
-  const all = getCollection(STORAGE_KEY,Catalog)
-  if (id === undefined) 
-    return all
-  return all.find((p)=>p.id ===  id) ?? null
+  const all = getCollection(STORAGE_KEY, Catalog)
+  if (id === undefined) return all
+
+  const product = all.find((p) => p.id === id)
+  if (!product) throw new Error('Product not found.')
+  return product
 }
 
 export async function createProduct(product) {

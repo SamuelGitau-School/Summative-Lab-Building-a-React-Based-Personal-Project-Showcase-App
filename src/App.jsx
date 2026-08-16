@@ -23,7 +23,7 @@ function App() {
 
       {/* <Route path="/browse" element={<ProtectedRoute><Products /></ProtectedRoute>} /> */}
 
-      <Route path="/products" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>}/>
+      <Route path="/products/:id" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>}/>
 
       <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>}/>
 

@@ -5,7 +5,6 @@ import { ThemeModeProvider } from './context/Theme-mode-context.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 import { CartProvider } from './context/CartContext.jsx';
 import App from './App';
-import './App.css';
 import './index.css';
 
 createRoot(document.getElementById('root')).render(
