@@ -33,24 +33,29 @@ const categoryIcons = {
 function Dashboard() {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('All');
-  const [featured, setFeatured] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const { user } = useAuth();
   const { addItem } = useCart();
 
   useEffect(() => {
+    setLoading(true);
     getProducts()
       .then((products) => {
-        const seen = new Set();
-        const picks = products.filter((p) => {
-          if (seen.has(p.category)) return false;
-          seen.add(p.category);
-          return true;
-        });
-        setFeatured(picks);
+        setAllProducts(products);
+      })
+      .catch((err) => {
+        setError(err.message || 'Failed to load products.');
       })
       .finally(() => setLoading(false));
   }, []);
+
+  const filtered = allProducts.filter((p) => {
+    const matchesCategory = category === 'All' || p.category === category;
+    const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <div>
@@ -75,9 +80,15 @@ function Dashboard() {
           <div className="flex justify-center py-12">
             <CircularProgress />
           </div>
+        ) : error ? (
+          <p className="admin-error">{error}</p>
+        ) : filtered.length === 0 ? (
+          <Typography variant="body2" sx={{ color: 'var(--text)', textAlign: 'center', mt: 4 }}>
+            No products match your search.
+          </Typography>
         ) : (
           <div className="dashboard-card-grid">
-            {featured.map((product) => (
+            {filtered.map((product) => (
               <Card key={product.id} className="dashboard-product-card">
                 <CardContent className="flex flex-col gap-2">
                   <div className="dashboard-card-icon">
