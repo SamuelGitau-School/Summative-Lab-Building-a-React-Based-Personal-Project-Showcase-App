@@ -1,0 +1,189 @@
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { Typography, Card, CardContent, Button, CircularProgress, Box, Stack } from '@mui/material'
+import Navbar from '../../components/layout/Navbar/Navbar'
+import Categories from '../../components/layout/dropdown/Categories'
+import { useAuth } from '../../context/AuthContext'
+import { useCart } from '../../context/CartContext'
+import { getProducts } from '../../utils/product'
+
+const categoryIcons = {
+  accessories: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <rect x="2" y="7" width="20" height="14" rx="2" />
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+    </svg>
+  ),
+  clothing: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" />
+    </svg>
+  ),
+  electronics: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <rect x="2" y="4" width="20" height="14" rx="2" />
+      <line x1="8" y1="21" x2="16" y2="21" />
+      <line x1="12" y1="18" x2="12" y2="21" />
+    </svg>
+  ),
+}
+
+function getCategoryIcon(product) {
+  const key = (product.department || '').toLowerCase()
+  return categoryIcons[key] || categoryIcons.accessories
+}
+
+function ProductCard({ product, onAddToCart }) {
+  return (
+    <Card
+      className="page-enter"
+      sx={{
+        borderRadius: 3,
+        border: '1px solid var(--border)',
+        background: 'color-mix(in srgb, var(--bg) 60%, transparent)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        boxShadow: 'var(--shadow)',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        textAlign: 'left',
+        transition: 'transform 0.15s ease',
+        '&:hover': { transform: 'translateY(-3px)' },
+      }}
+    >
+      <CardContent className="flex flex-col gap-2" sx={{ alignItems: 'flex-start', height: '100%' }}>
+        <Box sx={{ color: 'var(--accent)', display: 'flex' }}>{getCategoryIcon(product)}</Box>
+        <Typography variant="caption" sx={{ color: 'var(--accent)', textTransform: 'uppercase' }}>
+          {product.category}
+        </Typography>
+        <Typography variant="subtitle1" sx={{ color: 'var(--text-h)' }}>
+          {product.name}
+        </Typography>
+        <Typography variant="body2" sx={{ color: 'var(--text)' }}>
+          ${Number(product.price).toFixed(2)}
+        </Typography>
+        <div className="flex gap-2 mt-1" style={{ marginTop: 'auto', paddingTop: 4 }}>
+          <Button size="small" component={Link} to={`/products/${product.id}`}>
+            View
+          </Button>
+          <Button size="small" variant="contained" onClick={() => onAddToCart(product)}>
+            Add to cart
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+function Dashboard() {
+  const [search, setSearch] = useState('')
+  const [category, setCategory] = useState('All')
+  const [allProducts, setAllProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const { user } = useAuth()
+  const { addItem } = useCart()
+
+  useEffect(() => {
+    getProducts()
+      .then(setAllProducts)
+      .finally(() => setLoading(false))
+  }, [])
+
+  // Featured strip
+  const featured = (() => {
+    const seen = new Set();
+    return allProducts.filter((p) => {
+      if (seen.has(p.category)) return false
+      seen.add(p.category)
+      return true
+    })
+  })
+  ()
+
+
+  const filtered = allProducts.filter((p) => {
+    const matchesCategory =
+      category === 'All' ||
+      p.category === category ||
+      (p.department || '').toLowerCase() === category.toLowerCase()
+    const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase())
+    return matchesCategory && matchesSearch
+  })
+
+  const cardGridSx = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+    gap: 2,
+  }
+
+  return (
+    <Box>
+      <Navbar onSearch={setSearch} />
+
+      <Stack
+        direction={{ xs: 'column', sm: 'row' }}
+        justifyContent="space-between"
+        alignItems="center"
+        gap={2}
+        sx={{ p: 2.5, textAlign: 'left', flexWrap: 'wrap' }}
+      >
+        <Categories onSelect={setCategory} />
+
+        {user?.role === 'admin' && (
+          <Button size="small" variant="outlined" component={Link} to="/admin">
+            Switch to Admin Dashboard
+          </Button>
+        )}
+      </Stack>
+
+      <Box className="page-enter" sx={{ px: 2.5, pb: 2.5, textAlign: 'left' }}>
+        <Typography variant="h5" sx={{ color: 'var(--text-h)' }}>
+          Welcome back{user ? `, ${user.firstName}` : ''}
+        </Typography>
+        <Typography variant="body2" sx={{ color: 'var(--text)' }}>
+          Here's what's featured today.
+        </Typography>
+      </Box>
+
+      {loading ? (
+        <div className="flex justify-center py-12">
+          <CircularProgress />
+        </div>
+      ) : (
+        <>
+          <Box sx={{ px: 2.5, pb: 4, textAlign: 'left' }}>
+            <Typography variant="h6" sx={{ color: 'var(--text-h)', mb: 1 }}>
+              Featured
+            </Typography>
+            <Box sx={cardGridSx}>
+              {featured.map((product) => (
+                <ProductCard key={product.id} product={product} onAddToCart={addItem} />
+              ))}
+            </Box>
+          </Box>
+
+          <Box sx={{ px: 2.5, pb: 4, textAlign: 'left' }}>
+            <Typography variant="h6" sx={{ color: 'var(--text-h)', mt: 4, mb: 1 }}>
+              All Products {category !== 'All' ? `— ${category}` : ''}
+            </Typography>
+
+            {filtered.length === 0 ? (
+              <Typography variant="body2" sx={{ color: 'var(--text)' }}>
+                No products match your search or category.
+              </Typography>
+            ) : (
+              <Box sx={cardGridSx}>
+                {filtered.map((product) => (
+                  <ProductCard key={product.id} product={product} onAddToCart={addItem} />
+                ))}
+              </Box>
+            )}
+          </Box>
+        </>
+      )}
+    </Box>
+  )
+}
+
+export default Dashboard
