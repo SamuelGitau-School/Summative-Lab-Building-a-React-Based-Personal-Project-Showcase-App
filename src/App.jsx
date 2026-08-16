@@ -1,14 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
-import ProtectedRoute from './assets/Route/Protectedroute'
-import Landing from './components/Landing page/Landing'
-import Login from './components/Form page/Login/Login'
-import Signup from './components/Form page/Sign up/Sign-up'
-import Dashboard from './components/Dashboard/Dashboard'
-import ProfilePage from './components/Profile-page/ProfilePage'
-import AdminPanel from './components/Dashboard/AdminPanel/AdminPanel'
-import ProductDetail from './components/Product-page/Product-detail/Product-detail'
-import Cart from './components/Cart/Cart'
-import Wishlist from './components/Drop-Down/Wishlist/Wishlist'
+import ProtectedRoute from './routes/ProtectedRoute.jsx';
+import Landing from './pages/landing/Landing.jsx';
+import Login from './components/auth/Login.jsx';
+import Signup from './components/auth/Signup.jsx';
+import Dashboard from './pages/dashboard/Dashboard.jsx';
+import ProfilePage from './pages/profile/ProfilePage.jsx'
+import AdminPanel from './pages/admin/AdminPanel.jsx';
+import ProductDetail from './pages/products/ProductDetails.jsx'
+import Cart from './pages/cart/Cart.jsx'
+import Wishlist from './pages/wishlist/Wishlist.jsx'
 
 function App() {
   return (
@@ -20,6 +20,8 @@ function App() {
       <Route path="/dashboard"element={<ProtectedRoute><Dashboard /></ProtectedRoute>}/>
 
       <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>}/>
+
+      {/* <Route path="/browse" element={<ProtectedRoute><Products /></ProtectedRoute>} /> */}
 
       <Route path="/products/:id" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>}/>
 
