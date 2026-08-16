@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // This file runs once before each test file, via Vitest's `setupFiles`
 // config option (see vite.config.js's `test.setupFiles`).
 import { vi } from 'vitest';
@@ -58,6 +57,3 @@ global.ResizeObserver = class ResizeObserver {
 // the "Products" tab in AdminPanel.test.jsx would throw
 // "scrollIntoView is not a function".
 window.HTMLElement.prototype.scrollIntoView = jest.fn();
-=======
-import '@testing-library/jest-dom';
->>>>>>> 58355c02a7a67855aa932875f7d0a65c45a99578
