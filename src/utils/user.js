@@ -1,4 +1,21 @@
-import { getCollection, setCollection } from '../data/Localdb';
+import { getCollection, setCollection } from '../data/Localdb'
+
+const seedUsers = [
+  {
+    id: 'admin-1',
+    username: 'admin',
+    email: 'admin@gmail.com',
+    password: 'samuel',
+    firstName: 'Site',
+    lastName: 'Admin',
+    role: 'admin',
+  },
+]
+
+export function getUsersCollection() {
+  return getCollection('users', seedUsers)
+
+}
 
 export async function getCurrentUser() {
   const saved = localStorage.getItem('user')
@@ -7,12 +24,12 @@ export async function getCurrentUser() {
 }
 
 export async function getAllUsers() {
-  const users = getCollection('users', [])
+  const users = getUsersCollection()
   return users.map(({ password, ...safeUser }) => safeUser)
 }
 
 export async function updateUser(userId, updates) {
-  const users = getCollection('users', [])
+  const users = getUsersCollection()
   const updated = users.map((u) => (u.id === userId ? { ...u, ...updates } : u))
   setCollection('users', updated)
 
@@ -22,7 +39,7 @@ export async function updateUser(userId, updates) {
 }
 
 export async function changePassword(userId, currentPassword, newPassword) {
-  const users = getCollection('users', [])
+  const users = getUsersCollection()
   const idx = users.findIndex((u) => u.id === userId)
   if (idx === -1) throw new Error('User not found.')
 
@@ -36,7 +53,7 @@ export async function changePassword(userId, currentPassword, newPassword) {
 }
 
 export async function deleteUser(userId) {
-  const users = getCollection('users', [])
+  const users = getUsersCollection()
   setCollection('users', users.filter((u) => u.id !== userId))
   return { success: true }
 }

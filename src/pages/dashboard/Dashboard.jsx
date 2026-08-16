@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Typography, Card, CardContent, Button, CircularProgress } from '@mui/material';
-import Navbar from '../../components/layout/Navbar/Navbar.jsx';
-import Categories from '../../components/layout/dropdown/Categories';
-import Profile from '../../components/layout/dropdown/Profile';
-import { useAuth } from '../../context/AuthContext';
-import { useCart } from '../../context/CartContext';
-import { getProducts } from '../../utils/product';
-
-import './Dashboard.css';
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { Typography, Card, CardContent, Button, CircularProgress, TextField, MenuItem } from '@mui/material'
+import Navbar from '../../components/layout/Navbar/Navbar'
+import Categories from '../../components/layout/dropdown/Categories'
+import Profile from '../../components/layout/dropdown/Profile'
+import { useAuth } from '../../context/AuthContext'
+import { useCart } from '../../context/CartContext'
+import { getProducts } from '../../utils/product'
+import './Dashboard.css'
 
 const categoryIcons = {
   accessories: (
@@ -32,8 +31,8 @@ const categoryIcons = {
 }
 
 function getCategoryIcon(product) {
-  const key = (product.department || '').toLowerCase();
-  return categoryIcons[key] || categoryIcons.accessories;
+  const key = (product.department || '').toLowerCase()
+  return categoryIcons[key] || categoryIcons.accessories
 }
 
 function ProductCard({ product, onAddToCart }) {
@@ -60,7 +59,7 @@ function ProductCard({ product, onAddToCart }) {
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }
 
 function Dashboard() {
@@ -74,16 +73,16 @@ function Dashboard() {
   useEffect(() => {
     getProducts()
       .then(setAllProducts)
-      .finally(() => setLoading(false));
+      .finally(() => setLoading(false))
   }, [])
 
   // Featured strip
   const featured = (() => {
     const seen = new Set();
     return allProducts.filter((p) => {
-      if (seen.has(p.category)) return false;
-      seen.add(p.category);
-      return true;
+      if (seen.has(p.category)) return false
+      seen.add(p.category)
+      return true
     })
   })
   ()
@@ -104,6 +103,11 @@ function Dashboard() {
 
       <div className="dashboard-toolbar">
         <Categories onSelect={setCategory} />
+        {user?.role === 'admin' && (
+          <Button size="small" variant="outlined" component={Link} to="/admin">
+            Switch to Admin Dashboard
+          </Button>
+        )}
         <Profile />
       </div>
 
@@ -156,4 +160,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard;
+export default Dashboard

@@ -25,14 +25,13 @@ export function AuthProvider({children}){
     [])
 
     const loginUser = (userData) => setUser(userData)
-
+        
     const logoutUser = () => {
         setUser(null)
         localStorage.removeItem('token')
+        localStorage.removeItem('user')
     }
 
-    // Keeps the in-memory user (and the localStorage copy authContext
-    // rehydrates from on refresh) in sync after a profile edit.
     const updateUserContext = (updatedUser) => {
         setUser(updatedUser)
         localStorage.setItem('user', JSON.stringify(updatedUser))

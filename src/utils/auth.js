@@ -1,26 +1,27 @@
-import { getCollection, setCollection } from '../data/Localdb';
+import { getCollection, setCollection } from '../data/Localdb'
+import { getUsersCollection } from './user'
 
 function fakeToken(userId) {
-  return btoa(`${userId}-${Date.now()}`);
+  return btoa(`${userId}-${Date.now()}`)
 }
 
 export async function login(email, password) {
-  const users = getCollection('users', []);
-  const found = users.find((u) => u.email === email && u.password === password);
+  const users = getUsersCollection()
+  const found = users.find((u) => u.email === email && u.password === password)
 
   if (!found) {
-    throw new Error('Invalid email or password.');
+    throw new Error('Invalid email or password.')
   }
 
-  const { password: _pw, ...safeUser } = found;
-  return { token: fakeToken(found.id), user: safeUser };
+  const { password: _pw, ...safeUser } = found
+  return { token: fakeToken(found.id), user: safeUser }
 }
 
 export async function signup({ username, firstName, lastName, email, password }) {
-  const users = getCollection('users', []);
+  const users = getUsersCollection()
 
   if (users.some((u) => u.email === email)) {
-    throw new Error('An account with that email already exists.');
+    throw new Error('An account with that email already exists.')
   }
 
   const newUser = {
@@ -31,11 +32,11 @@ export async function signup({ username, firstName, lastName, email, password })
     email,
     password,
     role: 'customer',
-  };
+  }
 
-  users.push(newUser);
-  setCollection('users', users);
+  users.push(newUser)
+  setCollection('users', users)
 
-  const { password: _pw, ...safeUser } = newUser;
-  return { token: fakeToken(newUser.id), user: safeUser };
+  const { password: _pw, ...safeUser } = newUser
+  return { token: fakeToken(newUser.id), user: safeUser }
 }
