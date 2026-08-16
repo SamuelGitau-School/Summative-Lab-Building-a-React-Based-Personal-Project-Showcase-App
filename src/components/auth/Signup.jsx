@@ -1,19 +1,11 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-<<<<<<< HEAD:src/components/Form page/Sign up/Sign-up.jsx
-import { signup } from '../../../assets/Auth/auth';
-import { useAuth } from '../../../assets/Auth/authContext';
-import BackButton from '../../../assets/Navbar/BackButton';
-import PasswordLimit,{validatePassword} from '../../../assets/Password/Passwaord-input'
-import '../Form.css';
-import './Sign-up.css';
-=======
 import { signup } from '../../utils/auth';
 import { useAuth } from '../../context/AuthContext';
 import BackButton from '../reusable/BackButton';
 import './Form.css';
 import './Signup.css';
->>>>>>> 9bfd4b36cb13731285e65a7f14061dcc8221c602:src/components/auth/Signup.jsx
+
 
 const MAX_NAME_LENGTH = 18;
 const LETTERS_ONLY = /^[A-Za-z]*$/;

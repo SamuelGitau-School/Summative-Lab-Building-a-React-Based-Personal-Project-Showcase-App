@@ -1,7 +1,7 @@
-import { getCollection, setCollection } from '../../Database/db/Localdb'
-import { products as clothingProducts } from '../../Database/Data/Clothing_data'
-import { accessoryProducts } from '../../Database/Data/Accessories_data'
-import { electricalProducts } from '../../Database/Data/Electronics_data'
+import { getCollection, setCollection } from '../data/Localdb'
+import { products as clothingProducts } from '../data/Clothing_data'
+import { accessoryProducts } from '../data/Accessories_data'
+import { electricalProducts } from '../data/Electronics_data'
 
 const STORAGE_KEY = 'products'
 
