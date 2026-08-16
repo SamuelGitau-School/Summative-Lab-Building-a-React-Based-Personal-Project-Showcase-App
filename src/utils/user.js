@@ -5,7 +5,7 @@ const seedUsers = [
     id: 'admin-1',
     username: 'admin',
     email: 'admin@gmail.com',
-    password: 'samuel',
+    password: 'admin',
     firstName: 'Site',
     lastName: 'Admin',
     role: 'admin',
