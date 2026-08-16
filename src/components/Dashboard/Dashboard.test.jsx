@@ -15,3 +15,6 @@ jest.mock('../../assets/Auth/authContext', () => ({useAuth: jest.fn()}));
 jest.mock('../../assets/Cart/CartContext', () => ({useAuth: jest.fn()}));
 jest.mock('../../assets/Product/Product', () => ({getProducts: jest.fn()}));
 
+const mockProducts = [
+    {}
+]
