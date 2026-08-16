@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { signup } from '../../../assets/Auth/auth';
 import { useAuth } from '../../../assets/Auth/authContext';
 import BackButton from '../../../assets/Navbar/BackButton';
+import PasswordLimit,{validatePassword} from '../../../assets/Password/Passwaord-input'
 import '../Form.css';
 import './Sign-up.css';
 
@@ -36,6 +37,7 @@ function Signup() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+
 
   const handleNameChange = (setter) => (e) => {
     const value = e.target.value;
@@ -143,6 +145,7 @@ function Signup() {
           >
             <EyeIcon open={showPassword} />
           </button>
+          {password.length >0 && <PasswordLimit  password={password}/>}
         </div>
 
         <label className="form-label" htmlFor="confirmPassword">Confirm Password</label>
