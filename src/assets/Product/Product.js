@@ -1,47 +1,65 @@
-const API_BASE = '/api';
+import { getCollection, setCollection } from '../../Database/db/Localdb'
+import { products as clothingProducts } from '../../Database/Data/Clothing_data'
+import { accessoryProducts } from '../../Database/Data/Accessories_data'
+import { electricalProducts } from '../../Database/Data/Electronics_data'
 
-function authHeaders() {
-  const token = localStorage.getItem('token')
-  return { Authorization: `Bearer ${token}` }
+const STORAGE_KEY = 'products'
+
+function withUniqueIds(items, department) {
+  return items.map((item) => ({
+    ...item,
+    department,
+    id: `${department}-${item.id}`,
+  }))
 }
 
-// Get all products
+
+const Catalog = [
+  ...withUniqueIds(clothingProducts, 'clothing'),
+  ...withUniqueIds(accessoryProducts, 'accessories'),
+  ...withUniqueIds(electricalProducts, 'electronics'),
+]
+
 export async function getProducts() {
-  const res = await fetch(`${API_BASE}/products`, {
-    headers: authHeaders(),
-  })
-  if (!res.ok) throw new Error('Could not fetch products.')
-  return res.json()
+  return getCollection(STORAGE_KEY, Catalog)
 }
 
-// Admin-only: create a new product
 export async function createProduct(product) {
-  const res = await fetch(`${API_BASE}/products`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', ...authHeaders() },
-    body: JSON.stringify(product),
-  })
-  if (!res.ok) throw new Error('Could not create product.')
-  return res.json()
+  const current = getCollection(STORAGE_KEY, Catalog)
+  const newProduct = {
+    ...product,
+    id: product.id ?? `custom-${Date.now()}`,
+  }
+  
+  const updated = [...current, newProduct]
+  setCollection(STORAGE_KEY, updated)
+  return newProduct
 }
 
-// Admin-only: edit a product's fields
 export async function updateProduct(productId, updates) {
-  const res = await fetch(`${API_BASE}/products/${productId}`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', ...authHeaders() },
-    body: JSON.stringify(updates),
+  const current = getCollection(STORAGE_KEY, Catalog)
+  let updatedProduct = null
+  const updated = current.map((p) => {
+    if (p.id === productId) {
+      updatedProduct = { ...p, ...updates }
+      return updatedProduct
+    }
+    return p
   })
-  if (!res.ok) throw new Error('Could not update product.');
-  return res.json()
+
+  if (!updatedProduct) throw new Error('Product not found.')
+
+  setCollection(STORAGE_KEY, updated)
+  return updatedProduct
 }
 
-// Admin-only: remove a product
 export async function deleteProduct(productId) {
-  const res = await fetch(`${API_BASE}/products/${productId}`, {
-    method: 'DELETE',
-    headers: authHeaders(),
-  })
-  if (!res.ok) throw new Error('Could not delete product.')
-  return res.json()
+  const current = getCollection(STORAGE_KEY, Catalog)
+  const exists = current.some((p) => p.id === productId)
+
+  if (!exists) throw new Error('Product not found.')
+
+  const updated = current.filter((p) => p.id !== productId)
+  setCollection(STORAGE_KEY, updated)
+  return { id: productId, deleted: true }
 }

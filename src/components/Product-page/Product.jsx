@@ -51,6 +51,7 @@ function Product({ searchQuery = '' }) {
       {filtered.map((product) => (
         <Card key={product.id} className="product-card">
           <CardContent className="flex flex-col gap-2">
+            
             <Typography variant="subtitle1" sx={{ color: 'var(--text-h)' }}>
               {product.name}
             </Typography>
