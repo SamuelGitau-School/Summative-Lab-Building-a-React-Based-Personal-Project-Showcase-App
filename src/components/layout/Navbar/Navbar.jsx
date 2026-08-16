@@ -1,11 +1,15 @@
-import { AppBar, Toolbar, Typography, Stack } from '@mui/material';
+import { AppBar, Toolbar, Typography, Stack, IconButton, Badge } from '@mui/material';
+import { Link } from 'react-router-dom';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useAuth } from '../../../context/AuthContext';
+import { useCart } from '../../../context/CartContext';
 import Search from '../Search/Search'
 import DarkMode from '../../reusable/DarkModeToggle'
-import Logout from '../../reusable/LogoutButton'
+import Profile from '../dropdown/Profile'
 
 function Navbar({ onSearch }) {
   const { user } = useAuth()
+  const { count } = useCart()
 
   return (
     <AppBar
@@ -30,7 +34,20 @@ function Navbar({ onSearch }) {
             </Typography>
           )}
           <DarkMode />
-          <Logout />
+          {user && (
+            <IconButton
+              component={Link}
+              to="/cart"
+              size="small"
+              aria-label="cart"
+              sx={{ color: 'var(--text-h)' }}
+            >
+              <Badge badgeContent={count} color="primary" max={99}>
+                <ShoppingCartOutlinedIcon fontSize="small" />
+              </Badge>
+            </IconButton>
+          )}
+          <Profile />
         </Stack>
       </Toolbar>
     </AppBar>

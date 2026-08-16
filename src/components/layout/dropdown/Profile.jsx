@@ -1,17 +1,25 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { IconButton, Menu, MenuItem, Avatar } from '@mui/material';
+import { IconButton, Menu, MenuItem, Avatar, Divider } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { useAuth } from '../../../context/AuthContext';
+import { useLogout } from '../../reusable/LogoutButton';
 import './Profile.css';
 
 function Profile() {
     const { user } = useAuth()
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
+    const handleLogout = useLogout()
 
     if (!user) return null
 
     const initials = `${user.firstName?.[0] || ''}${user.lastName?.[0] || ''}`.toUpperCase()
+
+    const handleLogoutClick = () => {
+        setAnchorEl(null)
+        handleLogout()
+    }
 
     return (
         <>
@@ -28,6 +36,22 @@ function Profile() {
             </MenuItem>
             <MenuItem component={Link} to="/cart" onClick={() => setAnchorEl(null)}>
                 Cart
+            </MenuItem>
+
+            <Divider />
+
+            <MenuItem
+                onClick={handleLogoutClick}
+                sx={{
+                    color: '#b3261e',
+                    gap: 1,
+                    '&:hover': {
+                        bgcolor: 'rgba(179, 38, 30, 0.08)',
+                    },
+                }}
+            >
+                <LogoutIcon fontSize="small" />
+                Log out
             </MenuItem>
         </Menu>
         </>
