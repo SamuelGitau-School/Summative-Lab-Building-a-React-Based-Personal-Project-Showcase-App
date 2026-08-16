@@ -28,12 +28,7 @@ function Navbar({ onSearch }) {
         </div>
 
         <Stack direction="row" alignItems="center" gap={1.5}>
-          {user && (
-            <Typography variant="body2" className="hidden sm:inline" sx={{ color: 'var(--text)' }}>
-              {user.username}
-            </Typography>
-          )}
-          <DarkMode />
+          
           {user && (
             <IconButton
               component={Link}
@@ -47,6 +42,7 @@ function Navbar({ onSearch }) {
               </Badge>
             </IconButton>
           )}
+          <DarkMode />
           <Profile />
         </Stack>
       </Toolbar>
