@@ -21,6 +21,8 @@ function App() {
 
       <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>}/>
 
+      {/* <Route path="/browse" element={<ProtectedRoute><Products /></ProtectedRoute>} /> */}
+
       <Route path="/products" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>}/>
 
       <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>}/>

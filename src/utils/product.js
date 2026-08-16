@@ -20,8 +20,11 @@ const Catalog = [
   ...withUniqueIds(electricalProducts, 'electronics'),
 ]
 
-export async function getProducts() {
-  return getCollection(STORAGE_KEY, Catalog)
+export async function getProducts(id) {
+  const all = getCollection(STORAGE_KEY,Catalog)
+  if (id === undefined) 
+    return all
+  return all.find((p)=>p.id ===  id) ?? null
 }
 
 export async function createProduct(product) {

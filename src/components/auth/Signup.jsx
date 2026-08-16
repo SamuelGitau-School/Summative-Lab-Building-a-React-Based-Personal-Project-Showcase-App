@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { signup } from '../../utils/auth';
 import { useAuth } from '../../context/AuthContext';
 import BackButton from '../reusable/BackButton';
+import PasswordLimit from '../reusable/Passwaord-input'
 import './Form.css';
 import './Signup.css';
 
