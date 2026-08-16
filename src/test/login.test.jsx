@@ -2,9 +2,9 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
-import Login from './Login';
-import { login } from '../../utils/auth';
-import { useAuth } from '../../context/AuthContext.jsx';
+import Login from '../components/auth/Login.jsx';
+import { login } from '../utils/auth.js';
+import { useAuth } from '../context/AuthContext.jsx';
 
 // Mock the API call so no real network request happens
 vi.mock('../../utils/auth', () => ({

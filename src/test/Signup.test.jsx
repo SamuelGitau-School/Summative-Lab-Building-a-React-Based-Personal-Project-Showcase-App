@@ -2,9 +2,9 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
-import Signup from './Signup';
-import { signup } from '../../utils/auth';
-import { useAuth } from '../../context/AuthContext';
+import Signup from '../components/auth/Signup';
+import { signup } from '../utils/auth';
+import { useAuth } from '../context/AuthContext';
 
 const navigateMock = jest.fn();
 jest.mock('react-router-dom', () => ({

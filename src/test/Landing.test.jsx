@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Landing from './Landing';
+import Landing from '../pages/landing/Landing';
 
 function renderLanding() {
   render(
